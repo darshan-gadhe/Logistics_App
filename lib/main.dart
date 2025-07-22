@@ -39,6 +39,7 @@ class AppRoot extends StatelessWidget {
       darkTheme: AppTheme.darkTheme,
       themeMode: themeService.themeMode,
 
+
       debugShowCheckedModeBanner: false,
       initialRoute: '/login',
       routes: {
