@@ -2,55 +2,108 @@
 import 'package:flutter/material.dart';
 
 class DriverAppTheme {
-  // --- DEFINE THE DRIVER'S CUSTOM COLORS ---
-  static const Color driverBackgroundColor = Color(0xFF263238); // A professional, dark slate grey
-  static const Color driverCardColor = Color(0xFF37474F);      // A slightly lighter shade for cards
-  static const Color driverAccentColor = Color(0xFF19CAF2);      // A vibrant, action-oriented orange for key buttons
+  // --- DEFINE THE DRIVER'S BRAND COLORS ---
 
-  /// This function takes the app's default dark theme and applies specific overrides
-  /// to create a unique look and feel for the driver's UI.
-  static ThemeData getThemeOverride(BuildContext context) {
-    // Start with the base dark theme so we inherit most of its properties
-    final baseTheme = Theme.of(context);
+  // Light Theme Colors
+  static const Color lightPrimaryColor = Color(0xFF005A9C); // A strong, Royal Blue
+  static const Color lightAccentColor = Color(0xFFF26419);   // A vibrant, action-oriented Orange
+  static const Color lightBackgroundColor = Color(0xFFF8F9FA);
+  static const Color lightCardColor = Colors.white;
 
-    // Use .copyWith() to change only the properties we care about
-    return baseTheme.copyWith(
+  // Dark Theme Colors
+  static const Color darkPrimaryColor = Color(0xFF4FC3F7);    // A brighter Sky Blue for contrast
+  static const Color darkAccentColor = Color(0xFFF26419);     // The same vibrant Orange
+  static const Color darkBackgroundColor = Color(0xFF263238);  // Professional Dark Slate Grey
+  static const Color darkCardColor = Color(0xFF37474F);        // A slightly lighter shade for cards
 
-      // --- BACKGROUND AND SURFACE COLOR OVERRIDE ---
-      scaffoldBackgroundColor: driverBackgroundColor,
-
-      cardTheme: baseTheme.cardTheme.copyWith(
-        color: driverCardColor, // Change card background color
-        elevation: 1,
+  /// Returns a complete, distinct theme for the Driver's UI in LIGHT mode.
+  static ThemeData get lightTheme {
+    return ThemeData(
+      brightness: Brightness.light,
+      primaryColor: lightPrimaryColor,
+      scaffoldBackgroundColor: lightBackgroundColor,
+      cardColor: lightCardColor,
+      colorScheme: ColorScheme.fromSeed(
+        seedColor: lightPrimaryColor,
+        primary: lightPrimaryColor,
+        secondary: lightAccentColor,
+        brightness: Brightness.light,
       ),
 
-      // --- BOTTOM NAVIGATION BAR OVERRIDE ---
-      bottomNavigationBarTheme: baseTheme.bottomNavigationBarTheme.copyWith(
-        backgroundColor: driverCardColor, // Match the card color for a cohesive look
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.white60,
+      appBarTheme: const AppBarTheme(
+        backgroundColor: lightPrimaryColor,
+        foregroundColor: Colors.white,
+        elevation: 2,
       ),
 
-      // --- BUTTONS AND ACCENTS OVERRIDE ---
-      colorScheme: baseTheme.colorScheme.copyWith(
-        // This makes sure buttons and other accents use our new colors
-        primary: driverAccentColor,      // Primary actions now use orange
-        secondary: driverAccentColor,    // Secondary actions also use orange
+      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+        backgroundColor: Colors.white,
+        selectedItemColor: lightPrimaryColor,
+        unselectedItemColor: Colors.grey,
+        elevation: 10,
       ),
 
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          backgroundColor: driverAccentColor, // Default buttons are now orange
+          backgroundColor: lightPrimaryColor,
           foregroundColor: Colors.white,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-          padding: const EdgeInsets.symmetric(vertical: 16),
-          textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
         ),
       ),
 
-      floatingActionButtonTheme: baseTheme.floatingActionButtonTheme.copyWith(
-        backgroundColor: driverAccentColor,
+      floatingActionButtonTheme: const FloatingActionButtonThemeData(
+        backgroundColor: lightAccentColor,
         foregroundColor: Colors.white,
+      ),
+    );
+  }
+
+  /// Returns a complete, distinct theme for the Driver's UI in DARK mode.
+  static ThemeData get darkTheme {
+    return ThemeData(
+      brightness: Brightness.dark,
+      primaryColor: darkPrimaryColor,
+      scaffoldBackgroundColor: darkBackgroundColor,
+      cardColor: darkCardColor,
+      colorScheme: ColorScheme.fromSeed(
+        seedColor: darkPrimaryColor,
+        primary: darkPrimaryColor,
+        secondary: darkAccentColor,
+        brightness: Brightness.dark,
+      ),
+
+      appBarTheme: const AppBarTheme(
+        backgroundColor: darkCardColor,
+        foregroundColor: Colors.white,
+        elevation: 1,
+      ),
+
+      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+        backgroundColor: darkCardColor,
+        selectedItemColor: darkPrimaryColor,
+        unselectedItemColor: Colors.white70,
+        elevation: 10,
+      ),
+
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: darkPrimaryColor,
+          foregroundColor: darkBackgroundColor, // Dark text on light blue button
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          textStyle: const TextStyle(fontWeight: FontWeight.bold),
+        ),
+      ),
+
+      floatingActionButtonTheme: const FloatingActionButtonThemeData(
+        backgroundColor: darkAccentColor,
+        foregroundColor: Colors.white,
+      ),
+
+      outlinedButtonTheme: OutlinedButtonThemeData(
+          style: OutlinedButton.styleFrom(
+            foregroundColor: darkPrimaryColor,
+            side: const BorderSide(color: darkPrimaryColor),
+          )
       ),
     );
   }
